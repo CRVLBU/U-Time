@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /Utime_WEB/appsettings.json
 /UtimeAPI/appsettings.json
+/Utime_utility/Utime_utility.csproj
