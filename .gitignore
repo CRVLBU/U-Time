@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Utime_WEB/appsettings.json
+/UtimeAPI/appsettings.json
