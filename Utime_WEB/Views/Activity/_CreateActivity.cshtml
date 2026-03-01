@@ -1,0 +1,157 @@
+﻿@model Utime_WEB.Models.ViewModels.ActivityGetViewModel
+
+
+
+<div id="Hoffnungsschimmer" class="container">
+    <div class="modal fade"  tabindex="-1" role="dialog" id="create-modal">
+        <div   class="modal-dialog">
+            <div id="modal-create-content" class="modal-content" >
+                <div class="modal-header">
+                    <h5 class="modal-title">Создание задачи</h5>
+
+                </div>
+                <div class="modal-body">
+                    <form asp-action="CreateActivity">
+                        <div asp-validation-summary="All" class="text text-danger"></div>
+                        <div class="row">
+
+                            <div class="col-12 pb-2">
+                                <input asp-for=@Model.activity_create.ActivityName id="create-name" placeholder="Название..." class="form-control" />
+                                <span asp-validation-for=@Model.activity_create.ActivityName class="text text-danger text-center"></span>
+                                </div>
+                            <div class="col-12">
+
+                                <div class="form-group">
+                                    <div id="picker" class="datepicker date input-group">
+                                        <input readonly asp-for=@Model.activity_create.DeadLine id="input-date" type="text" style="background-color:transparent" class="form-control" placeholder="Дата..." />
+                                        <div class="input-group-addon">
+                                            <span class="input-group-text px-4"><i class="bi bi-calendar"></i></span>
+                                        </div>
+                                           
+
+                                    </div>
+                                    <span asp-validation-for=@Model.activity_create.DeadLine class="text text-danger"></span>
+                                </div>
+                                   
+                            </div>
+                               
+                            <div class="col-12">
+
+                                <div class="form-group">
+                                    <div id="time" class="input-group clockpicker">
+                                        <input readonly asp-for=@Model.activity_create.TimeFrame id="input-a" type="text" placeholder="Время..." style="background-color:transparent" class="form-control" />
+                                        <div class="input-group-addon">
+                                            <span class="input-group-text px-4"><i class="bi bi-clock"></i></span>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for=@Model.activity_create.TimeFrame class="text text-danger"></span>
+                                </div>
+                            </div>
+                               
+                            <div class="col-12 pb-2">
+                                <select asp-for=@Model.activity_create.CategoryID asp-items="@Model.categories" class="form-select">
+                                    <option disabled selected>---Категория---</option>
+                                </select>
+
+                                <span asp-validation-for=@Model.activity_create.CategoryID class="text text-danger"></span>
+                            </div>
+                            <div class="col-12 pb-2">
+                                <textarea class="form-control" asp-for=@Model.activity_create.Description style="height:50px" placeholder="Описание..."></textarea>
+                            </div>
+
+                            <div class="row col-12">
+                                <div class="col-5">
+                                    <select id="imp-c" asp-for=@Model.activity_create.Imp class="form-select" style="width:calc(var(--vw, 1vw) * 13);">
+                                        <option disabled selected>--Важно--</option>
+                                        <option value="0" id="imp-high" data-imp="High">Высокий</option>
+                                        <option value="1" id="imp-medium" data-imp="Medium">Средний</option>
+                                        <option value="2" id="imp-low" data-imp="Low">Низкий</option>
+                                    </select>
+                                </div>
+                                <div class="col-5 pl-3" >
+                                    <select id="urgency-c" asp-for=@Model.activity_create.Urgency class="form-select" style="width:calc(var(--vw, 1vw) * 13);">
+                                        <option disabled selected>--Срочно--</option>
+                                        <option value="0" id="urgency-high" data-urg="High">Высокий</option>
+                                        <option value="1" id="urgency-medium" data-urg="Medium">Средний</option>
+                                        <option value="2" id="urgency-low" data-urg="Low">Низкий</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <div class="pt-1">
+
+                                        <span class="text invisible" id="number-c" style="padding-left:calc(var(--vw, 1vw) * 2);font-weight:bold;font-size:x-large;color:#70ccc7">#1</span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="row col-12">
+                                <div class="col-5">
+                                    <span asp-validation-for=@Model.activity_create.Imp class="text text-danger" style="padding-left:calc(var(--vw, 1vw) *1)"></span>
+                                </div>
+                                <div class="col-5">
+                                    <span asp-validation-for=@Model.activity_create.Urgency class="text text-danger" ></span>
+                                </div>
+                            </div>
+                            <div class="row col-12">
+
+                                <div class="col-4">
+                                    <div class="pb-1" style="padding-left:calc(var(--vw, 1vw) * 5.5)">
+                                        <span id="dot-1c" class="dot" style="background-color:#bbb"></span>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-4">
+                                    <div class="pb-1" style="padding-left:calc(var(--vw, 1vw) * 8)">
+                                        <span id="dot-2c" class="dot" style="background-color:#bbb"></span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-4">
+                                    <div >
+
+                                        <span class="text" id="priority-c" style="padding-left:calc(var(--vw, 1vw) * 8);margin-bottom:calc(var(--vh, 1vh) * 1);font-weight:bold;font-size:x-large"></span>
+
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="float-end pb-2">
+                                <input type="submit"  style="font-size:18px" class="btn btn-success form-control" value="Отправить"></input>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+  
+    
+            
+
+
+    
+        
+
+
+}

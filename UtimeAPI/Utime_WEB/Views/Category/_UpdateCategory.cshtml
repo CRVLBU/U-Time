@@ -1,0 +1,30 @@
+﻿@model Utime_WEB.Models.ViewModels.Category1ViewModel
+<div class="modal fade" tabindex="-1" role="dialog" id="update-modal-cat">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header float-end">
+                <h5 class="modal-title">Updating Category</h5>
+
+            </div>
+            <div class="modal-body">
+                <form asp-action="UpdateCategory">
+                    <div asp-validation-summary="ModelOnly" class="text text-danger"></div>
+                    <div class="row">
+
+                        <div class="col- pb-2">
+                            <input asp-for=@Model.CreateCategory.CategoryName class="form-control" placeholder="Новое название..." ></input>
+                            <span asp-validation-for="@Model.CreateCategory.CategoryName" class="text text-danger"></span>
+                        </div>
+                        <div class="float-end">
+                            <input type="submit" class="btn btn-success form-control" ></input>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div> 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

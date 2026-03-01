@@ -1,0 +1,22 @@
+﻿<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (TempData["success"] != null)
+{
+    
+    <script type="text/javascript">
+        console.log("hallucination");
+
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: '@TempData["success"]',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+        })
+    </script>
+
+
+
+
+}
+

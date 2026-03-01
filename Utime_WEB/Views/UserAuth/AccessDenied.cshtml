@@ -1,0 +1,17 @@
+﻿ @model Utime_WEB.Models.ViewModels.AccessDeniedVM
+<h1 id="heading" data-number="@Model.number">Unauthorized</h1>
+
+<h3>The access has been denied</h3>
+@section Scripts{
+    <script type="text/javascript">
+
+        $(function(){
+            
+                        $("li#select_elem").find(".nav-item.active").removeClass("active");
+                        var num=$("#heading").data("number");
+                        console.log(num);
+            ($("li#select_elem")).eq(num).addClass("active");
+            
+        });
+        </script>
+}

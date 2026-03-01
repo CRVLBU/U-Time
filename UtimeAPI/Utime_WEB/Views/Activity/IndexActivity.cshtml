@@ -1,0 +1,726 @@
+﻿ @model Utime_WEB.Models.ViewModels.ActivityGetViewModel
+  <partial id="partial1" name="_CreateActivity"/> 
+
+<partial name="_UpdateActivity" />
+<partial name="_DeleteActivity" />
+<partial name="ShowActivity" /> 
+
+<!-- Calling the Minified Stylesheet Of the Bootstrap Library -->
+<link rel="stylesheet" href="~/css/progresss.css" />
+
+ @if (Model.days.Count > 0)
+{
+    <nav>
+
+
+        <div style="text-align:center">
+            <ul class="pagination  justify-content-center" id="mypagination">
+                <li id="num" class="page-item" data-state="unclicked">
+                    <a id="arrow-back" class="page-link" style="width:calc(var(--vw, 1vw) * 7);height:calc(var(--vh, 1vh) * 5.5);font-size:calc(var(--vh, 1vh) * 2);display:flex;flex-direction:column;justify-content:center">&laquo</a>
+                </li>
+                @{
+                    int counter = 0;
+                }
+
+                @foreach (var item in Model.days)
+                {
+                    @if (item[4] == "1")
+                    {
+                        <div>
+                            <span class="mini-dot position-absolute z-1"></span>
+                        </div>
+                    }
+
+                    @if(item[5]=="1")
+                    {
+                        <li id="num" data-date="@item[1]/@item[2]/@item[3]" data-state="clicked" class="page-item active">
+                            <a id=@counter class="page-link" style="width:calc(var(--vw, 1vw) * 7); height:calc(var(--vh, 1vh) * 5.5);font-size:calc(var(--vh, 1vh) * 2);display:flex;flex-direction:column;justify-content:center">@item[0] @item[1]</a>
+                        </li>
+                    }
+                    else{
+                        <li id="num" data-date="@item[1]/@item[2]/@item[3]" data-state="unclicked" class="page-item">
+                            <a id=@counter class="page-link" style="width:calc(var(--vw, 1vw) * 7); height:calc(var(--vh, 1vh) * 5.5);font-size:calc(var(--vh, 1vh) * 2);display:flex;flex-direction:column;justify-content:center">@item[0] @item[1]</a>
+                    </li>
+                    }
+
+                    counter++;
+                }
+
+                <li id="num" class="page-item" data-state="unclicked">
+                    <a id="arrow-forth" class="page-link" style="width:calc(var(--vw, 1vw) * 7);height:calc(var(--vh, 1vh) * 5.5);font-size:calc(var(--vh, 1vh) * 2);display:flex;flex-direction:column;justify-content:center">&raquo</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+}
+ <div class="col-12">
+    <a class="btn btn-success float-end pt-1" id="create-md"  data-toggle="modal" data-target="#create-modal"><i class="bi bi-plus"></i> Создать</a>
+</div>
+@if (Model.mode != "2")
+{
+    <h1 class="pt-4" style="padding-left:40px">Предстоящие</h1>
+}
+else
+{
+    <h1 class="pt-4" style="padding-left:40px">Просроченные</h1>
+}
+
+<hr /> 
+<div class="row pt-4" >
+
+@if (Model.activities_undone.Count() > 0)
+{
+
+        <div class="col-6" style="padding-left:calc(var(--vw, 1vw) * 3)">
+            <select id="sort_by" class="form-select" style="width:calc(var(--vw, 1vw) * 41)">
+                <option disabled selected>--Сортировка--</option>
+                <option>Приоритет</option>
+                <option>Важность</option>
+                <option>Срочность</option>
+            </select>
+
+        </div>
+        @if(Model.mode!="2"){
+            <div class="col-6" >
+            <h2>Осталось времени до дедлайна (%)</h2>
+            </div>
+        }
+}
+
+
+
+
+    
+
+</div>
+
+
+
+<div  class="row" data-mode="@Model.mode" id="get_mode">
+
+    @if (Model.activities_undone.Count() > 0)
+    {
+        @foreach (var item in @Model.activities_undone)
+        {
+
+
+
+            <div id="info_act" data-isexpired="@item.isExpired" data-id="@item.ID" data-percentage="@item.percentage" class="p-4 col-lg-6 col-md-12">
+
+                <div class="row" id="border"  data-priority="@item.Priority" style="border-radius:20px;border: 3px solid;background-color:white">
+                    <div class="col-4">
+                        <a class="label label-info">
+                           
+
+                            <input type="checkbox" id="check" data-isdone="@item.isDone" data-id="@item.ID" />
+
+
+
+
+                        </a>
+                    </div>
+                    <div class="col-8">
+
+
+                        <span style="font-size:calc(var(--vh, 1vh) * 3.5);font-weight:500;" id="card_name-@item.ID" class="text text-black card-title">@item.ActivityName</span>
+
+                    </div>
+                    <div class="row pb-3 pt-3" style="display:flex">
+                        <div class="col-4">
+                            <span class="text text-black card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3);">Приоритет: </span>
+                            @{
+                                if (item.Priority == "A")
+                                {
+                                    <span class="text  card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3);color:#d13b5b">A</span>
+                                }
+                                else if (item.Priority == "B")
+                                {
+                                    <span class="text  card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3);color: #41d7a7">B</span>
+                                }
+                                else if (item.Priority == "C")
+                                {
+                                                            <span class="text  card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3);color:#d1d13b">C</span>
+                                }
+                                else if (item.Priority == "D")
+                                {
+                                    <span class="text  card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3);color:#4251f5">D</span>
+                                }
+
+                            }
+                        </div>
+                        <div class="col-3 float-end">
+                            <a class="btn btn-primary" id="Show" data-id="@item.ID" style="width:calc(var(--vw, 1vw) * 7);display:flex;justify-content:center" data-target="#modal-show" data-toggle="modal"><i class="bi bi-eye"></i></a>
+                        </div>
+
+                        <div class="col-3">
+                            <a class="btn btn-success " id="Update" style="width:calc(var(--vw, 1vw) * 7);display:flex;justify-content:center" data-toggle="modal" data-target="#update-modal" data-id="@item.ID"><i class="bi bi-pencil"></i></a>
+                        </div>
+                        <div class="col-2">
+
+
+                            <a class="btn btn-danger" id="Delete" style="width:calc(var(--vw, 1vw) * 6);display:flex;justify-content:center" data-id="@item.ID" data-toggle="modal" data-target="#delete-activity"><i class="bi bi-trash"></i></a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            @if (item.percentage != 0)
+            {
+                <div id="progress-@item.ID" class="col-lg-6 col-md-12" style="padding-top:calc(var(--vh, 1vh) * 12);padding-bottom:calc(var(--vh, 1vh) * 5">
+
+                    <div class="ml-2" style="padding-right:calc(var(--vw, 1vw) * 3);display:flex;justify-content:center">
+
+                        @if ((double)item.percentage < 33.3)
+                        {
+                            <div style="margin-top:calc(var(--vh, 1vh) * (-1))" >
+                                <span class="position-absolute z-1 " style="font-weight:bold;font-size:calc(var(--vh, 1vh) * 3.5)">@item.percentage%</span>
+                            </div>
+                            <div class="progress progress-bar-segmented" style="height:25px;transform:rotate(180deg);width:calc(var(--vw, 1vw) * 37);margin-left:calc(var(--vh, 1vh) * 10);flex:1 1 auto">
+                                <div class="z-0 progress-bar progress-bar-danger" role="progressbar" style="width:@item.percentage%"></div>
+
+                            </div>
+                        }
+                        @if ((double)item.percentage >= 33.3 && (double)item.percentage < 66.6)
+                        {
+                            <div style="margin-top:calc(var(--vh, 1vh) * (-1))">
+                                <span class="position-absolute z-1 " style="font-weight:bold;font-size:calc(var(--vh, 1vh) * 3.5)">@item.percentage%</span>
+                            </div>
+
+                            <div class="progress progress-bar-segmented" style="height:25px;transform:rotate(180deg);width:calc(var(--vw, 1vw) * 37);margin-left:calc(var(--vh, 1vh) * 10);flex:1 1 auto">
+                                    <div class="z-0 progress-bar progress-bar-danger" role="progressbar" style="width:33.3%"></div>
+
+                                    <div class="z-0 progress-bar progress-bar-warning" role="progressbar" style="width:@(item.percentage-33)%"></div>
+
+                                </div>
+
+                           
+                        }
+                        @if ((double)item.percentage > 66.6)
+                        {
+
+                            <div style="margin-top:calc(var(--vh, 1vh) * (-1))">
+                                <span class="position-absolute z-1 " style="font-weight:bold;font-size:calc(var(--vh, 1vh) * 3.5)">@item.percentage%</span>
+                            </div>
+                         
+                                <div class="progress progress-bar-segmented " style="height:25px;transform:rotate(180deg);width:calc(var(--vw, 1vw) * 37);margin-left:calc(var(--vh, 1vh) * 10);flex:1 1 auto">
+
+                                <div class="progress-bar progress-bar-danger " role="progressbar" style="width:33.3%;height:5.5rem"></div>
+
+                                <div class="progress-bar progress-bar-warning " role="progressbar" style="width:33.3%;height:5.5rem"></div>
+
+                                <div class="progress-bar progress-bar-success " role="progressbar" style="width:@(item.percentage-66)%;height:5.5rem"></div>
+                            </div>
+                           
+
+                        }
+                    </div>
+                    <div class="col-lg-12 col-md-12" style="display:flex;justify-content:center;gap:0px calc(var(--vw, 1vw) * 10)">
+
+                        <span class="text" style="margin-left:calc(var(--vw, 1vw) * 2);font-size:calc(var(--vh, 1vh) * 2)">Низкий</span>
+                        <span class="text" style="font-size:calc(var(--vh, 1vh) * 2)">Средний</span>
+                        <span class="text" style="font-size:calc(var(--vh, 1vh) * 2)">Высокий</span>
+
+                    </div>
+
+
+
+         
+
+
+
+
+
+
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-6 col-md-12" style="padding-top:calc(var(--vh, 1vh) * 12)">
+                    <div class="ml-2" style="padding-right:calc(var(--vh, 1vh) * 3.5)">
+                        <span class="position-absolute z-1" style="padding-left:calc(var(--vw, 1vw) * 24);font-weight:bold">Просрочено</span>
+                        <div class="progress z-0" style="height:25px">
+                            <div class="progress-bar progress-bar-danger" style="width:100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+
+        }
+    }
+    else
+    {
+        <h2 class="text-center" style="padding-left:20px;opacity:50%"><i class="bi bi-x-circle-fill"></i> Пока ничего нет ...</h2>
+    }
+
+    @if (Model.mode != "2")
+    {
+        <h1 class="pt-4" style="padding-left:40px">Выполненные</h1>
+        <hr />
+        @if (Model.activities_done.Count() > 0)
+        {
+            @foreach (var item in @Model.activities_done)
+            {
+
+
+
+                <div id="info-@item.ID" style="opacity:@item.opacity%" class="p-4 col-lg-6 col-md-12">
+
+                    <div class="row" id="border" data-priority="@item.Priority" style="border-radius:20px;border: 3px solid;background-color:white">
+                        <div class="col-4">
+                            <a class="label label-info">
+
+
+                                <input type="checkbox" id="check" data-id="@item.ID" data-isdone="@item.isDone" checked />
+
+
+
+                            </a>
+                        </div>
+                        <div class="col-8">
+
+                            <span style="font-size:calc(var(--vh, 1vh) * 3.5);font-weight:500;text-decoration:line-through" id="card_name-@item.ID" class="text text-black card-title">@item.ActivityName</span>
+
+                
+                        </div>
+                        <div class="row pb-3 pt-3" style="display:flex">
+                            <div class="col-4">
+                                <span class="text text-black card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3)">Приоритет: </span>
+                                @{
+                                    if (item.Priority == "A")
+                                    {
+                                        <span class="text  card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3);color:#d13b5b">A</span>
+                                    }
+                                    else if (item.Priority == "B")
+                                    {
+                                        <span class="text  card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3);color: #41d7a7">B</span>
+                                    }
+                                    else if (item.Priority == "C")
+                                    {
+                                        <span class="text  card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3);color:#d1d13b">C</span>
+                                    }
+                                    else if (item.Priority == "D")
+                                    {
+                                        <span class="text  card-title" style="font-weight:500;font-size:calc(var(--vh, 1vh) * 3.5);color:#4251f5">D</span>
+                                    }
+
+                                }
+                            </div>
+                            @if (item.isDone == true)
+                            {
+                                <div class="col-3 float-end">
+                                    <a class="btn btn-primary disabled" id="Show" data-id="@item.ID" style="width:calc(var(--vw, 1vw) * 7);display:flex;justify-content:center" data-target="#modal-show" data-toggle="modal"><i class="bi bi-eye"></i></a>
+                                </div>
+
+                                <div class="col-3">
+                                    <a class="btn btn-success disabled" id="Update" style="width:calc(var(--vw, 1vw) * 7);display:flex;justify-content:center" data-toggle="modal" data-target="#update-modal" data-id="@item.ID"><i class="bi bi-pencil"></i></a>
+                                </div>
+                                <div class="col-2">
+
+
+                                    <a class="btn btn-danger disabled" id="Delete" style="width:calc(var(--vw, 1vw) * 6);display:flex;justify-content:center" data-id="@item.ID" data-toggle="modal" data-target="#delete-activity"><i class="bi bi-trash"></i></a>
+
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-3 float-end">
+                                    <a class="btn btn-primary" id="Show" data-id="@item.ID" style="width:calc(var(--vw, 1vw) * 7);display:flex;justify-content:center" data-target="#modal-show" data-toggle="modal"><i class="bi bi-eye"></i></a>
+                                </div>
+
+                                <div class="col-3">
+                                    <a class="btn btn-success" id="Update" style="width:calc(var(--vw, 1vw) * 7);display:flex;justify-content:center" data-toggle="modal" data-target="#update-modal" data-id="@item.ID"><i class="bi bi-pencil"></i></a>
+                                </div>
+                                <div class="col-2">
+
+
+                                    <a class="btn btn-danger" id="Delete" style="width:calc(var(--vw, 1vw) * 7);display:flex;justify-content:center" data-id="@item.ID" data-toggle="modal" data-target="#delete-activity"><i class="bi bi-trash"></i></a>
+
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            }
+
+        }
+        else
+        {
+            <h2 class="text-center" style="padding-left:20px;opacity:50%"><i class="bi bi-x-circle-fill"></i> Пока ничего нет ...</h2>
+        }
+    }
+
+
+
+     
+     </div>
+ 
+@section Scripts{
+    <script type="text/javascript">
+
+        
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let new_vh = window.innerHeight * 0.01;
+            let new_vw = window.innerWidth * 0.01;
+
+            vh = 7.12 * (7.12 / new_vh);
+
+            console.log(new_vw);
+
+            document.documentElement.style.setProperty('--vw', `${new_vw}px`);
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+
+        });
+    
+
+
+       
+
+        $(function () {
+            let new_vh = window.innerHeight * 0.01;
+            let new_vw = window.innerWidth * 0.01;
+
+            vh = 7.12 * (7.12 / new_vh);
+
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            document.documentElement.style.setProperty('--vw', `${new_vw}px`);
+
+           
+            if($("#create-name").val().length>0){
+                $("#imp-c").trigger("updated");
+                $("#urgency-c").trigger("updated");
+                $("#create-modal").modal("show");
+                console.log("achieved");
+                $("#create-modal").css("background-color", "rgba(0,0,0,0.5)");
+            }
+            
+
+
+                        $("li#select_elem").find(".active").removeClass("active");
+            if($("#get_mode").data("mode")=="1"){
+                 $("li#select_elem:eq(2)").addClass("active");
+            }
+            else if($("#get_mode").data("mode")=="0"){
+                 $("li#select_elem:eq(0)").addClass("active");
+            }
+             else{
+                 $("li#select_elem:eq(4)").addClass("active");
+             }
+               
+            
+            $(".clockpicker").clockpicker({
+                autoclose:true
+            });
+               
+
+
+
+            $(".datepicker").datepicker({
+                autoclose: true,
+                format: "dd/mm/yyyy",
+                
+            });
+            $("#sort_by").on("change",function(e){
+                var attr=$(this).find(":selected");
+                var value=attr.text();
+                $.post("IndexActivity", { new_date: null, multiple: null, sortBy: value },function(data){
+                    $("body").html(data);
+                });
+                
+            });
+            $("div#info_act").each(function (ind) {
+                console.log($(this).data("isexpired"));
+                console.log($(this).data("percentage"));
+                if ($(this).data("isexpired") == "False" && $(this).data("percentage") == "0") {
+                    console.log("delve");
+                    $.post("ExpireActivity", { id: $(this).data("id") });
+                    $.post("UpdateActivity", { activityModel: null }, function (data) {
+                        $("body").html(data);
+                    })
+                }
+            });
+            $("input#check").on("change", function (e) {
+                $.post("CompleteActvity", { id: $(this).data("id") });
+
+      
+                $.post("UpdateActivity", { ActivityModel :null},function(data){
+                    $("body").html(data);
+                });
+                ///$("#card").prop("class", "disabled");
+        //         console.log($(this).data("isdone"));
+        //        if($(this).data("isdone")=="False"){
+        //             $("#card_name-" + $(this).data("id")).prop("style", "text-decoration:line-through;font-size:25px;font-weight:500");
+        //             $("#info-" + $(this).data("id")).prop("style", "opacity:0.5");
+        //             $("#progress-" + $(this).data("id")).prop("style", "opacity:0.5");
+        //            $(this).data("isdone", "True");
+
+
+        //        }
+        //        else{
+        //             $("#card_name-" + $(this).data("id")).prop("style", "text-decoration:none;font-size:25px;font-weight:500");
+        //             $("#info-" + $(this).data("id")).prop("style", "opacity:1");
+        //             $("#progress-" + $(this).data("id")).prop("style", "opacity:1");
+        // $(this).data("isdone", "False");
+        //        }
+                // $.post("IndexActivity", { new_string: null, multiple: null, sortBy: null }, function (data) {
+                //     $("body").html(data);
+                //     console.log("done");
+                // });
+
+            })
+            $("#create-md").on("click", function (e) {
+
+
+
+                $("#create-modal").css("background-color", "rgba(0,0,0,0.5)");
+            });
+   
+
+            $("#arrow-back").on("click", function (e) {
+
+                $.post("Date_list", { increase: -1,activities:null }, function (data) {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+
+                        $("#" + i).text(data[i][0] + " " + data[i][1]);
+                    }
+
+                });
+            });
+            $("#arrow-forth").on("click", function (e) {
+             
+                $.post("Date_list", { increase: 1 ,activities:null}, function (data) {
+            
+                    for (var i = 0; i < data.length; i++) {
+                        
+                        $("#" + i).text(data[i][0] + " " + data[i][1]);
+                   
+                    }
+                    $("li#num").each(function (ind, elem) {
+                        console.log(elem);
+                    });
+                    
+                });
+
+            });
+            $("li#num").on("mouseenter", function (e) {
+                $(this).attr("class", "page-item active");
+
+
+            });
+            $("li#num").on("click", function (e) {
+                $("li#num").each(function (ind, elem) {
+                   $(this).attr("class","page-item");
+                    $(this).data("state", "unclicked");
+                });
+
+
+            
+                console.log($(this).data("date"));
+                console.log($(this).attr("id"));
+                $.post("IndexActivity", { new_date: $(this).data("date") }, function (data) {
+
+
+                   $("body").html(data);
+     
+                   
+                  
+                });
+            });
+            $("li#num").on("mouseleave", function (e) {
+                if($(this).data("state")=="unclicked"){
+                    $(this).attr("class", "page-item");
+                }
+
+                
+            })
+ 
+            $("a#Update").on("click", function (e) {
+                $.post("SetActivityId", { id:$(this).data("id") });
+
+                $("#dot-1u").data("id", $(this).data("id"));
+                $("#dot-2u").data("id", $(this).data("id"));
+                $("#update-modal").css("background-color", "rgba(0,0,0,0.5)");
+                $.post("GetActivity", { id: $(this).data("id"),state:"update" }, function (data) {
+                    
+
+                    $("#upd-name").val(data[0]);
+                    $("#upd-date").val(data[1]);
+                    $("#upd-time").val(data[2]);
+                    $("#upd-category").val(data[3]);
+                    $("upd-category").change();
+                    $("#imp-u").val(data[4]);
+                    $("#imp-u").change();
+                    $("#imp-u").trigger("updated");
+
+                    $("#urgency-u").val(data[5]);
+                    $("#urgency-u").change();
+                    $("#urgency-u").trigger("updated");
+                    $("#upd-description").val(data[6]);
+
+                    console.log($("#upd-name").text());
+                });
+            });
+
+            $("a#Delete").on("click", function (e) {
+                $.post("SetActivityId", { id: $(this).data("id") });
+                $("#delete-activity").css("background-color", "rgba(0,0,0,0.5)");
+            });
+            $("a#Show").on("click", function (e) {
+
+                $("#modal-show").css("background-color", "rgba(0,0,0,0.5)");
+                $.post("GetActivity", { id: $(this).data("id"),state:"show" }, function (data) {
+                    console.log($("#t-activity").text());
+                    $("#t-activity").text(data[0]);
+                    $("#t-category").text(data[1]);
+                    $("#t-priority").text(data[2]);
+                    $("#t-cd").text(data[3]);
+                    $("#t-dl").text(data[4]);
+                    $("#t-des").text(data[5]);
+                    console.log(data[5]);
+
+                });
+            });
+
+
+      
+        $("#imp-c").on("change", function (e) {
+
+            var attr = $(this).find(":selected");
+         
+            if (attr.attr("id") == "imp-high") {
+                $("#dot-1c").css("background-color", "red");
+            }
+            else if (attr.attr("id") == "imp-medium") {
+                console.log("yellow");
+                $("#dot-1c").css("background-color", "yellow");
+            }
+            else {
+                $("#dot-1c").css("background-color", "green");
+            }
+        
+            if ($("#dot-1c").css("background-color") != "rgb(187, 187, 187)" && $("#dot-2c").css("background-color") != "rgb(187, 187, 187)") {
+                var imp = $("#imp-c").find(":selected").data("imp");
+
+                var urg = $("#urgency-c").find(":selected").data("urg");
+                $.post("SetPriority", { imp: imp, urg: urg }, function (data) {
+                    $("#priority-c").text(data[0]);
+                    $("#priority-c").css("color", data[1]);
+                        $.post("DefineOrder", { priority: data[0], date: $("#input-date").val(), timeFrame: $("#input-a").val() ,id:0}, function (data) {
+                            $("#number-c").text("#" + data);
+                            $("#number-c").attr("class", "text visible");
+                        });
+                });
+            }
+        });
+
+        $("#urgency-c").on("change", function (e) {
+            var attr = $(this).find(":selected");
+            if (attr.attr("id") == "urgency-high") {
+                $("#dot-2c").css("background-color", "red");
+            }
+            else if (attr.attr("id") == "urgency-medium") {
+                $("#dot-2c").css("background-color", "yellow");
+            }
+            else {
+                $("#dot-2c").css("background-color", "green");
+            }
+
+            if ($("#dot-1c").css("background-color") != "rgb(187, 187, 187)" && $("#dot-2c").css("background-color") != "rgb(187, 187, 187)") {
+                var imp = $("#imp-c").find(":selected").data("imp");
+                var urg = $("#urgency-c").find(":selected").data("urg");
+          
+                $.post("SetPriority", { imp: imp, urg: urg }, function (data) {
+                    $("#priority-c").text(data[0]);
+                    $("#priority-c").css("color", data[1]);
+                    $.post("DefineOrder", { priority: data[0], date: $("#input-date").val(),timeFrame:$("#input-a").val() }, function (data) {
+                        $("#number-c").text("#"+data);    
+                        $("#number-c").attr("class", "text visible");
+                    });
+                    
+                });
+            }
+        });
+            $("#imp-u").on("change updated", function (e) {
+                console.log("achieved");
+                var attr = $(this).find(":selected");
+
+                if (attr.attr("id") == "imp-high") {
+                    $("#dot-1u").css("background-color", "red");
+                }
+                else if (attr.attr("id") == "imp-medium") {
+        
+                    $("#dot-1u").css("background-color", "yellow");
+                }
+                else {
+                    $("#dot-1u").css("background-color", "green");
+                }
+
+                if ($("#dot-1u").css("background-color") != "rgb(187, 187, 187)" && $("#dot-2u").css("background-color") != "rgb(187, 187, 187)") {
+                    var imp = $("#imp-u").find(":selected").data("imp");
+
+                    var urg = $("#urgency-u").find(":selected").data("urg");
+                    $.post("SetPriority", { imp: imp, urg: urg }, function (data) {
+                        $("#priority-u").text(data[0]);
+                        $("#priority-u").css("color", data[1]);
+                        $.post("DefineOrder", { priority: data[0], date: $("#upd-date").val(), timeFrame: $("#upd-time").val(), id: $("#dot-1u").data("id") }, function (data) {
+                            $("#number-u").text("#" + data);
+
+                        });
+                    });
+                }
+            });
+            $("#urgency-u").on("change updated", function (e) {
+                console.log("striven");
+                var attr = $(this).find(":selected");
+                if (attr.attr("id") == "urgency-high") {
+                    $("#dot-2u").css("background-color", "red");
+                }
+                else if (attr.attr("id") == "urgency-medium") {
+                    $("#dot-2u").css("background-color", "yellow");
+                }
+                else {
+                    $("#dot-2u").css("background-color", "green");
+                }
+
+                if ($("#dot-1u").css("background-color") != "rgb(187, 187, 187)" && $("#dot-2u").css("background-color") != "rgb(187, 187, 187)") {
+                    var imp = $("#imp-u").find(":selected").data("imp");
+                    var urg = $("#urgency-u").find(":selected").data("urg");
+                    console.log(urg);
+                    $.post("SetPriority", { imp: imp, urg: urg }, function (data) {
+                        $("#priority-u").text(data[0]);
+                        $("#priority-u").css("color", data[1]);
+                        $.post("DefineOrder", { priority: data[0], date: $("#upd-date").val(), timeFrame: $("#upd-time").val() ,id:$("#dot-2u").data("id")}, function (data) {
+                            $("#number-u").text("#" + data);
+                            console.log(data);
+
+                        });
+                    });
+                }
+                    
+                    
+            });
+        });
+
+        </script>
+        <partial name="_ValidationScriptsPartial" />
+
+}
+
+
+
+
+ 

@@ -1,0 +1,22 @@
+﻿<div class="modal fade" tabindex="-1" role="dialog" id="delete-modal-cat">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Вы уверены?</h5>
+            </div>
+            <div class="modal-body">
+                <p>Если вы удалите данную категорию, то все задачи, связанные с ней, будут автоматически удалены.</p>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-4">
+                        <a class="btn btn-primary" asp-action="IndexCategory" asp-controller="Category">Cancel</a>
+                    </div>
+                    <div class="col-4 offset-2">
+                        <a class="btn btn-success" asp-action="DeleteCategory" asp-controller="Category">Ok</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

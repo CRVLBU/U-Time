@@ -1,0 +1,174 @@
+
+.progress-bar-segmented .progress-bar {
+    border-right: 2px solid #2602f0;
+ 
+}
+
+
+
+    .progress-bar-segmented .progress-bar:last-child {
+        border-right: none;
+    }
+
+.progress-bar {
+    background-image: -webkit-linear-gradient(top,#428bca 0,#3071a9 100%);
+    background-image: linear-gradient(to bottom,#428bca 0,#3071a9 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca', endColorstr='#ff3071a9', GradientType=0)
+}
+
+
+.progress-bar-success {
+    background-image: -webkit-linear-gradient(top,#5cb85c 0,#449d44 100%);
+    background-image: linear-gradient(to bottom,#5cb85c 0,#449d44 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5cb85c', endColorstr='#ff449d44', GradientType=0)
+}
+
+.progress-bar-transp {
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5cb85c', endColorstr='#ff449d44', GradientType=0)
+}
+
+.progress-bar-info {
+    background-image: -webkit-linear-gradient(top,#5bc0de 0,#31b0d5 100%);
+    background-image: linear-gradient(to bottom,#5bc0de 0,#31b0d5 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff31b0d5', GradientType=0)
+}
+
+.progress-bar-warning {
+    background-image: -webkit-linear-gradient(top,#f0ad4e 0,#ec971f 100%);
+    background-image: linear-gradient(to bottom,#f0ad4e 0,#ec971f 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff0ad4e', endColorstr='#ffec971f', GradientType=0)
+}
+
+.progress-bar-danger {
+    background-image: -webkit-linear-gradient(top,#d9534f 0,#c9302c 100%);
+    background-image: linear-gradient(to bottom,#d9534f 0,#c9302c 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9534f', endColorstr='#ffc9302c', GradientType=0)
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+.mini-dot {
+    height: 10px;
+    width: 10px;
+    background-color: rgb(98,226,0);
+    border-radius: 50%;
+    display: inline-block;
+}
+@media screen and (max-width: 2000px) {
+    .carding {
+        border-radius: 20px;
+        height: 500px;
+    }
+
+    .carding-2 {
+        padding-left: 30px;
+        padding-top: 65px;
+        padding-bottom: 110px;
+    }
+
+    .carding-3 {
+        max-height: 600px;
+        max-width: 600px;
+        border-radius: 50px;
+    }
+
+    .carding-4 {
+        padding-left: 100px;
+        padding-top: 145px;
+    }
+    .carding-5 {
+        font-size: 32px;
+    }
+    .lull {
+        padding-top:90px;
+        padding-left:50px;
+    }
+    .carding-6{
+
+        padding-top:180px;
+    }
+    .depict-1 {
+        max-height: 800px;
+        max-width: 800px;
+        border-radius: 10px;
+    }
+    .depict-2 {
+        max-height: 900px;
+        max-width: 900px;
+        border-radius: 10px;
+    }
+    .carding-7 {
+        padding-top: 120px;
+        padding-left: 130px;
+    }
+    .carding-8 {
+        padding-top: 180px;
+        padding-left: 20px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .carding {
+        border-radius: 20px;
+        height: 300px;
+    }
+
+    .carding-2 {
+        padding-left: 5px;
+        padding-top: 50px;
+        padding-bottom: 95px;
+    }
+
+    .carding-3 {
+        max-height: 250px;
+        max-width: 250px;
+        border-radius: 50px;
+    }
+
+    .carding-4 {
+        padding-left: 55px;
+        padding-top: 45px;
+    }
+    .carding-5{
+        font-size:14px;
+    }
+    .lull {
+        padding-top: 40px;
+        padding-left: 5px;
+    }
+    .carding-6 {
+        padding-left: 10px;
+        padding-top: 65px;
+    }
+    .depict-1{
+        max-height:450px;
+        max-width:450px;
+        border-radius:10px;
+    }
+    .depict-2 {
+        max-height: 350px;
+        max-width: 350px;
+        border-radius: 10px;
+    }
+    .carding-7 {
+        padding-top: 60px;
+        padding-left: 60px;
+    }
+    .carding-8 {
+        padding-top: 120px;
+        padding-left: 10px;
+    }
+}
+
+

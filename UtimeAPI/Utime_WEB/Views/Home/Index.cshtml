@@ -1,0 +1,126 @@
+﻿
+ <link rel="stylesheet" href="~/css/progresss.css" />
+<div style="display:flex;flex-wrap:wrap">
+    <div class="row" id="card-one" style="background-color:rgba(255,253,0,0.6);flex:1 1 auto;border-radius:20px;height:calc(var(--vh, 1vh) * 73);">
+        <div class="col-6" style="flex:1 1 auto">
+            <img class="d-block " style="width:90%;border-radius:10px;margin-top:calc(var(--vh, 1vh) * 8);margin-left:calc(var(--vw, 1vw) * 3)" src="~/time_management2.jpg" />
+        </div>
+
+
+        <div class="col-6" style="flex:1 1 auto;margin-top:calc(var(--vh, 1vh) * 8);">
+            <div>
+                <ul>
+                    <li style="font-weight:bolder;font-size:calc(var(--vh, 1vh) * 4)">
+                        У тебя много задач?
+
+                    </li>
+                    <li style="padding-top:15px;font-weight:bolder;font-size:calc(var(--vh, 1vh) * 4);">
+                        Не можешь вовремя справиться?
+
+                    </li>
+                    <li style="padding-top:15px;font-weight:bolder;font-size:calc(var(--vh, 1vh) * 4);">
+                        Хочешь распределять задачи по приоритету?
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+ </div>
+
+<div style="padding-top:100px">
+
+
+    <div class="row " style="background-color:rgba(98,226,0,0.6);flex:1 1 auto;height:calc(var(--vh, 1vh) * 73);border-radius:20px">
+        <div class="col-12" style="margin-top:calc(var(--vh, 1vh) * 8);">
+            <h1 style="flex:1 1 auto;">
+                Определяй приоритет твоей задаче:
+            </h1>
+        </div>
+        <div class="col-12">
+            <div style="flex:1 1 auto;">
+
+
+                <img src="~/table.png" class="depict-2" style="margin-top:calc(var(--vh, 1vh) * 6);flex:1 1 auto;margin-left:calc(var(--vw, 1vw) * 10)"></img>
+
+
+            </div>
+        </div>
+ 
+    </div>
+</div>
+
+
+            <div style="padding-top:100px">
+    <div class="row" style="flex:1 1 auto;background-color:rgba(255,171,0,0.6);height:calc(var(--vh, 1vh) * 73);border-radius:20px">
+        <div class="col-12" style="flex:1 1 auto;margin-left:calc(var(--vw, 1vw) * 7);margin-top:calc(var(--vh, 1vh) *5)">
+            <h1 style="font-size:calc(var(--vh, 1vh) * 4);">Выполняй задачи:</h1>
+        </div>
+        <div class="col-12" style="margin-left:calc(var(--vw, 1vw) * 5);">
+ 
+            <img class="d-block depict-2" style="flex:1 1 auto;" src="~/Screen3.png" />
+
+        </div>
+
+        
+    </div>
+            </div>
+
+<div style="padding-top:100px">
+    <div class="row" style="background-color:rgba(180,249,0,0.6);flex:1 1 auto;border-radius:20px;height:calc(var(--vh, 1vh) * 73);">
+        <div class="col-12 " style="flex:1 1 auto;margin-left:calc(var(--vw, 1vw) * 7);margin-top:calc(var(--vh, 1vh) *5)">
+            <h1 style="flex:1 1 auto;font-size:calc(var(--vh, 1vh) * 4);">Совершенствуйся со статистикой:</h1>
+        </div>
+        <div class="col-12" style="margin-left:calc(var(--vw, 1vw) * 5);">
+            <img class="d-block depict-2" style="flex:1 1 auto;" src="~/Stats.png" />
+        </div>
+
+    </div>
+
+</div>
+ 
+              
+                
+           
+
+  
+@section Scripts{
+    <script type="text/javascript">
+        let vh = 7.12;
+
+        let real_height = 7.12;
+
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let new_vh = window.innerHeight * 0.01;
+            let new_vw = window.innerWidth * 0.01;
+            
+            vh = vh * (real_height/ new_vh);
+         
+            real_height = new_vh;
+            console.log(new_vw);
+          
+            document.documentElement.style.setProperty('--vw', `${new_vw}px`);
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            
+           
+        });
+        $(function(){
+            let new_vh = window.innerHeight * 0.01;
+            let new_vw = window.innerWidth * 0.01;
+            
+            vh = vh* (real_height/ new_vh);
+            
+            real_height = new_vh;
+      
+       
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+             document.documentElement.style.setProperty('--vw', `${new_vw}px`);
+                    $("li#select_elem").find(".active").removeClass("active");
+            $("li#select_elem:eq(0)").addClass("active");
+        
+        });
+        </script>
+}
+   
+ 

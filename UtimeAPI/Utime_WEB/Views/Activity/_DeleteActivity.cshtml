@@ -1,0 +1,22 @@
+﻿<div class="modal fade" tabindex="-1" role="dialog" id="delete-activity">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Вы уверены?</h5>
+            </div>
+            <div class="modal-body">
+                <p>Если Вы удалите данную задачу, то её уже нельзя будет восстановить.</p>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-4">
+                        <a class="btn btn-primary" asp-action="IndexActivity" asp-controller="Activity">Отмена</a>
+                    </div>
+                    <div class="col-4 offset-2">
+                        <a class="btn btn-success" asp-action="DeleteActivity" asp-controller="Activity">Ok</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

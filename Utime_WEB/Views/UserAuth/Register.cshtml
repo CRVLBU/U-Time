@@ -1,0 +1,53 @@
+﻿@model Utime_WEB.Models.DTO.RegisterRequestDTO
+<form method="post" asp-action="Register">
+    <div class="p-4 container">
+        <div class="row text-center">
+            <h1>Регистрация</h1>
+        </div>
+        <div class="row text-center">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-6 offset-3 pb-2">
+                <input class="form-control" asp-for=@Model.UserName type="text" placeholder="Имя..." />
+
+            </div>
+            <div class="col-6 offset-3 pb-2">
+                <input class="form-control" id="pass2" asp-for=@Model.Password type="password" placeholder="Пароль..." />
+
+            </div>
+            <div class="col-1">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="show_btn2" style="margin-left:-85px;height:40px"><i id="depict2" class="bi bi-eye-fill"></i></span>
+                </div>
+            </div>
+            <div class="col-6 offset-3 pb-2">
+                <input type="submit" class="form-control btn btn-success" style="font-size:18px" value="Зарегистрироваться" />
+
+            </div>
+
+        </div>
+    </div>
+
+
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        $(function () {
+                                    $("li#select_elem").find(".active").removeClass("active");
+            $("li#select_elem:eq(5)").addClass("active");
+            $("#show_btn2").on("click", function (e) {
+                if ($("#pass2").attr("type") == "text") {
+                    $("#depict2").attr("class", "bi bi-eye-fill");
+                    $("#pass2").attr("type", "password");
+                }
+                else {
+                    $("#depict2").attr("class", "bi bi-eye-slash-fill");
+                    $("#pass2").attr("type", "text");
+                }
+            });
+        });
+    </script>
+}

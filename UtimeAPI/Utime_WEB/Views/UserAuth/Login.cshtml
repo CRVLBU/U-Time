@@ -1,0 +1,86 @@
+﻿@model Utime_WEB.Models.DTO.LoginRequestDTO
+<div style="display:flex;justify-content:center">
+
+
+<form method="post" asp-action="Login" style="flex:1 1 auto">
+    <div class="p-4 container">
+        <div class="row text-center" >
+            <h1>Вход</h1>
+      </div>
+        <div class="row text-center">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+        </div>
+        <div class="row">
+            <div class="col-6 offset-3 pb-2">
+                <input class="form-control" asp-for=@Model.UserName type="text" placeholder="Имя..." style="flex 1 1 auto"/>
+
+        </div>
+            <div class="col-6 offset-3 pb-2">
+                    <input class="form-control" id="pass" asp-for=@Model.Password type="text" placeholder="Пароль..." style="flex 1 1 auto" />
+
+                </div>
+                <div class="col-1">
+                <div class="input-group-append">
+                        <span class="input-group-text" id="show_btn" style="margin-left:calc(var(--vw,1vw)*(-6.3));height:40px;width:calc(var(--vw,1vw)*4.7);display:flex;justify-content:center"><i id="depict" class="bi bi-eye-fill"></i></span>
+                </div>
+                </div>
+                
+   
+            <div class="col-6 offset-3 pb-2">
+                <button type="submit" class="form-control btn btn-success " style="font-size:18px">Вход</button>
+
+            </div>
+
+    </div>
+    </div>
+
+
+</form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+    <script type="text/javascript">
+        let vh = 7.12;
+
+        let real_height = 7.12;
+
+        window.addEventListener('resize', () => {
+            // We execute the same script as before
+            let new_vh = window.innerHeight * 0.01;
+            let new_vw = window.innerWidth * 0.01;
+
+            vh = vh * (real_height / new_vh);
+
+            real_height = new_vh;
+            console.log(new_vw);
+
+            document.documentElement.style.setProperty('--vw', `${new_vw}px`);
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+
+        });
+        $(function () {
+            let new_vh = window.innerHeight * 0.01;
+            let new_vw = window.innerWidth * 0.01;
+
+            vh = 7.12 * (7.12 / new_vh);
+
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            document.documentElement.style.setProperty('--vw', `${new_vw}px`);
+                        $("li#select_elem").find(".active").removeClass("active");
+            $("li#select_elem:eq(4)").addClass("active");
+            
+            $("#show_btn").on("click", function (e) {
+                if ($("#pass").attr("type") == "text"){
+                $("#depict").attr("class", "bi bi-eye-fill");
+                $("#pass").attr("type", "password");
+            }
+                        else {
+                $("#depict").attr("class", "bi bi-eye-slash-fill");
+                $("#pass").attr("type", "text");
+            }
+        });
+        });    
+    </script>
+}
