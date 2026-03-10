@@ -49,4 +49,4 @@
 
 ## Ссылки на подробные README:
   * 📦 UtimeAPI: [Подробное README](./UtimeAPI/README.md)
-  * 💻 Frontend: [Подробное README](./frontend/README.md)
+  * 💻 UtimeWEB: [Подробное README](./Utime_WEB/README.md)
